@@ -1,0 +1,8 @@
+# Dependencies
+node_modules
+
+# Build directory
+public
+
+# Other
+.DS_Store
