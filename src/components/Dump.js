@@ -1,7 +1,7 @@
 // Credit West Bos: https://github.com/wesbos/dump
 import React from "react";
 
-const Dump = (props) => (
+export const Dump = (props) => (
     <div
         style={{
             fontSize: 20,
@@ -20,5 +20,3 @@ const Dump = (props) => (
         ))}
     </div>
 );
-
-export default Dump;

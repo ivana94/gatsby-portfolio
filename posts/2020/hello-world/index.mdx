@@ -4,10 +4,32 @@ date: 2020-09-11
 published: true
 ---
 
-# h1 Heading
+## Yes! Some code!
 
-My first post!!
+Here is the `Dump` component!
 
-## h2 Heading
+```jsx
+import React from "react";
 
-### h3 Heading
+const Dump = (props) => (
+    <div
+        style={{
+            fontSize: 20,
+            border: "1px solid #efefef",
+            padding: 10,
+            background: "white",
+        }}
+    >
+        {Object.entries(props).map(([key, val]) => (
+            <pre key={key}>
+                <strong style={{ color: "white", background: "red" }}>
+                    {key} ?
+                </strong>
+                {JSON.stringify(val, "", " ")}
+            </pre>
+        ))}
+    </div>
+);
+
+export default Dump;
+```
