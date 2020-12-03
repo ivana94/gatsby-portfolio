@@ -1,7 +1,5 @@
-import React from "react";
 import { MDXProvider } from "@mdx-js/react";
-import Highlight, { defaultProps } from "prism-react-renderer";
-import theme from "prism-react-renderer/themes/nightOwl";
+import React from "react";
 import { Code } from "./src/components/Code";
 
 const components = {
@@ -9,7 +7,7 @@ const components = {
         <h2 style={{ color: "rebeccapurple" }}>{children}</h2>
     ),
     "p.inlineCode": (props) => (
-        <code style={{ backgroundColor: "lightgray" }} {...props} />
+        <code {...props} style={{ backgroundColor: "lightgrey" }}></code>
     ),
     pre: ({ children: { props } }) => {
         if (props.mdxType === "code") {

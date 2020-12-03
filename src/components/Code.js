@@ -2,6 +2,8 @@ import React from "react";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import theme from "prism-react-renderer/themes/nightOwl";
 import styled from "styled-components";
+import { copyToClipboard } from "../utils/copy-to-clipboard";
+import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
 
 export const Pre = styled.pre`
     text-align: left;
@@ -17,6 +19,18 @@ export const Pre = styled.pre`
     font-family: "Courier New", Courier, monospace;
 `;
 
+const CopyCode = styled.button`
+    position: absolute;
+    right: 0.25rem;
+    border: 0;
+    border-radius: 3px;
+    margin: 0.25em;
+    opacity: 0.3;
+    &:hover {
+        opacity: 1;
+    }
+`;
+
 export const LineNo = styled.span`
     display: inline-block;
     width: 2em;
@@ -24,7 +38,21 @@ export const LineNo = styled.span`
     opacity: 0.3;
 `;
 
-const Code = ({ codeString, language, ...props }) => {
+export const Code = ({ codeString, language, ...props }) => {
+    if (props["react-live"]) {
+        return (
+            <LiveProvider code={codeString} noInline={true} theme={theme}>
+                <LiveEditor />
+                <LiveError />
+                <LivePreview />
+            </LiveProvider>
+        );
+    }
+
+    const handleClick = () => {
+        copyToClipboard(codeString);
+    };
+
     return (
         <Highlight
             {...defaultProps}
@@ -34,6 +62,7 @@ const Code = ({ codeString, language, ...props }) => {
         >
             {({ className, style, tokens, getLineProps, getTokenProps }) => (
                 <Pre className={className} style={style}>
+                    <CopyCode onClick={handleClick}>Copy</CopyCode>
                     {tokens.map((line, i) => (
                         <div {...getLineProps({ line, key: i })}>
                             <LineNo>{i + 1}</LineNo>
@@ -47,5 +76,3 @@ const Code = ({ codeString, language, ...props }) => {
         </Highlight>
     );
 };
-
-export default Code;

@@ -2,7 +2,6 @@ import React from "react";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { graphql, Link } from "gatsby";
 import { Layout } from "../components/Layout";
-import { Dump } from "../components/Dump";
 
 export default ({ data, pageContext }) => {
     const { frontmatter, body } = data.mdx;

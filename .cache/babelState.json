@@ -3,6 +3,10 @@
     "develop": {
       "plugins": [
         {
+          "name": "babel-plugin-lodash",
+          "options": {}
+        },
+        {
           "name": "babel-plugin-styled-components",
           "stage": "develop",
           "options": {
@@ -15,15 +19,15 @@
           "options": {}
         },
         {
-          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/@babel/plugin-proposal-optional-chaining/lib/index.js",
+          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/gatsby-plugin-typescript/node_modules/@babel/plugin-proposal-optional-chaining/lib/index.js",
           "options": {}
         },
         {
-          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/@babel/plugin-proposal-nullish-coalescing-operator/lib/index.js",
+          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/gatsby-plugin-typescript/node_modules/@babel/plugin-proposal-nullish-coalescing-operator/lib/index.js",
           "options": {}
         },
         {
-          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/@babel/plugin-proposal-numeric-separator/lib/index.js",
+          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/gatsby-plugin-typescript/node_modules/@babel/plugin-proposal-numeric-separator/lib/index.js",
           "options": {}
         }
       ],
@@ -31,7 +35,10 @@
         {
           "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/@babel/preset-typescript/lib/index.js",
           "options": {
-            "plugins": []
+            "plugins": [],
+            "allExtensions": false,
+            "isTSX": false,
+            "jsxPragma": "React"
           }
         }
       ],
@@ -43,19 +50,23 @@
     "develop-html": {
       "plugins": [
         {
+          "name": "babel-plugin-lodash",
+          "options": {}
+        },
+        {
           "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/@babel/plugin-proposal-object-rest-spread/lib/index.js",
           "options": {}
         },
         {
-          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/@babel/plugin-proposal-optional-chaining/lib/index.js",
+          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/gatsby-plugin-typescript/node_modules/@babel/plugin-proposal-optional-chaining/lib/index.js",
           "options": {}
         },
         {
-          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/@babel/plugin-proposal-nullish-coalescing-operator/lib/index.js",
+          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/gatsby-plugin-typescript/node_modules/@babel/plugin-proposal-nullish-coalescing-operator/lib/index.js",
           "options": {}
         },
         {
-          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/@babel/plugin-proposal-numeric-separator/lib/index.js",
+          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/gatsby-plugin-typescript/node_modules/@babel/plugin-proposal-numeric-separator/lib/index.js",
           "options": {}
         },
         {
@@ -71,7 +82,10 @@
         {
           "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/@babel/preset-typescript/lib/index.js",
           "options": {
-            "plugins": []
+            "plugins": [],
+            "allExtensions": false,
+            "isTSX": false,
+            "jsxPragma": "React"
           }
         }
       ],
@@ -83,19 +97,23 @@
     "build-html": {
       "plugins": [
         {
+          "name": "babel-plugin-lodash",
+          "options": {}
+        },
+        {
           "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/@babel/plugin-proposal-object-rest-spread/lib/index.js",
           "options": {}
         },
         {
-          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/@babel/plugin-proposal-optional-chaining/lib/index.js",
+          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/gatsby-plugin-typescript/node_modules/@babel/plugin-proposal-optional-chaining/lib/index.js",
           "options": {}
         },
         {
-          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/@babel/plugin-proposal-nullish-coalescing-operator/lib/index.js",
+          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/gatsby-plugin-typescript/node_modules/@babel/plugin-proposal-nullish-coalescing-operator/lib/index.js",
           "options": {}
         },
         {
-          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/@babel/plugin-proposal-numeric-separator/lib/index.js",
+          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/gatsby-plugin-typescript/node_modules/@babel/plugin-proposal-numeric-separator/lib/index.js",
           "options": {}
         },
         {
@@ -111,7 +129,10 @@
         {
           "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/@babel/preset-typescript/lib/index.js",
           "options": {
-            "plugins": []
+            "plugins": [],
+            "allExtensions": false,
+            "isTSX": false,
+            "jsxPragma": "React"
           }
         }
       ],
@@ -123,19 +144,23 @@
     "build-javascript": {
       "plugins": [
         {
+          "name": "babel-plugin-lodash",
+          "options": {}
+        },
+        {
           "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/@babel/plugin-proposal-object-rest-spread/lib/index.js",
           "options": {}
         },
         {
-          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/@babel/plugin-proposal-optional-chaining/lib/index.js",
+          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/gatsby-plugin-typescript/node_modules/@babel/plugin-proposal-optional-chaining/lib/index.js",
           "options": {}
         },
         {
-          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/@babel/plugin-proposal-nullish-coalescing-operator/lib/index.js",
+          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/gatsby-plugin-typescript/node_modules/@babel/plugin-proposal-nullish-coalescing-operator/lib/index.js",
           "options": {}
         },
         {
-          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/@babel/plugin-proposal-numeric-separator/lib/index.js",
+          "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/gatsby-plugin-typescript/node_modules/@babel/plugin-proposal-numeric-separator/lib/index.js",
           "options": {}
         },
         {
@@ -151,7 +176,10 @@
         {
           "name": "/Users/ivanamatijevic/dev/dev-blog/node_modules/@babel/preset-typescript/lib/index.js",
           "options": {
-            "plugins": []
+            "plugins": [],
+            "allExtensions": false,
+            "isTSX": false,
+            "jsxPragma": "React"
           }
         }
       ],

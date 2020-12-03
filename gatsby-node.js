@@ -26,7 +26,6 @@ exports.createPages = ({ actions, graphql }) => {
         if (result.errors) {
             throw result.errors;
         }
-        console.log(result);
 
         const posts = result.data.allMdx.nodes;
 

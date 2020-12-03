@@ -3,7 +3,10 @@ var plugins = [{
       options: {"plugins":[]},
     },{
       plugin: require('/Users/ivanamatijevic/dev/dev-blog/node_modules/gatsby-plugin-mdx/gatsby-ssr'),
-      options: {"plugins":[],"extensions":[".mdx",".md"]},
+      options: {"plugins":[{"resolve":"/Users/ivanamatijevic/dev/dev-blog/node_modules/gatsby-remark-images","id":"4a359a36-fef3-5c49-a0f9-45c24a5fd434","name":"gatsby-remark-images","version":"3.6.0","pluginOptions":{"plugins":[],"maxWidth":590},"nodeAPIs":["pluginOptionsSchema"],"browserAPIs":["onRouteUpdate"],"ssrAPIs":[]}],"extensions":[".mdx",".md"],"gatsbyRemarkPlugins":[{"resolve":"gatsby-remark-images","options":{"maxWidth":590}}]},
+    },{
+      plugin: require('/Users/ivanamatijevic/dev/dev-blog/gatsby-ssr'),
+      options: {"plugins":[]},
     }]
 // During bootstrap, we write requires at top of this file which looks like:
 // var plugins = [
