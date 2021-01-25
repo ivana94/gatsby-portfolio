@@ -4,18 +4,55 @@ import Img from "gatsby-image";
 import styled from "styled-components";
 import { Layout } from "../components/Layout";
 
-const IndexWrapper = styled.main``;
+const LineDiv = styled.div`
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+    position: relative;
+    bottom: 5vh;
+`;
 
-const PostWrapper = styled.div``;
+const IndexWrapper = styled.main`
+    display: flex;
+    flex-wrap: wrap;
+`;
+
+const PostWrapper = styled.div`
+    padding: 0 15px;
+    width: 30%;
+
+    a {
+        text-decoration: none;
+    }
+
+    h1 {
+        color: #000;
+        font-family: Georgia, "New York Times";
+        font-weight: 300;
+        font-size: 1.5rem;
+    }
+
+    p.date-published {
+        font-weight: bold;
+        background: red;
+    }
+
+    p {
+        color: #333;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 0.9rem;
+    }
+`;
 
 const Image = styled(Img)`
-    border-radius: 5px;
+    width: 100%;
+    height: 20vh;
 `;
 
 export default ({ data }) => {
     return (
         <>
             <Layout>
+                <LineDiv></LineDiv>
                 <IndexWrapper>
                     {data.allMdx.nodes.map(
                         ({ id, excerpt, frontmatter, fields }) => (
@@ -23,9 +60,9 @@ export default ({ data }) => {
                                 <Link to={fields.slug}>
                                     {!!frontmatter.cover ? (
                                         <Image
-                                            sizes={
+                                            fluid={
                                                 frontmatter.cover
-                                                    .childImageSharp.sizes
+                                                    .childImageSharp.fluid
                                             }
                                         />
                                     ) : null}
@@ -57,8 +94,8 @@ export const query = graphql`
                     cover {
                         publicURL
                         childImageSharp {
-                            sizes(maxWidth: 2000, traceSVG: { color: "#639" }) {
-                                ...GatsbyImageSharpSizes_tracedSVG
+                            fluid {
+                                ...GatsbyImageSharpFluid
                             }
                         }
                     }

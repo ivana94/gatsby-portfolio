@@ -10,8 +10,8 @@ export default ({ data, pageContext }) => {
         <Layout>
             {previous && <Link to={previous.fields.slug}>previous post</Link>}
             {next && <Link to={next.fields.slug}>next post</Link>}
-            <h1>{frontmatter.title}</h1>
-            <h3>{frontmatter.date}</h3>
+            <h3>{frontmatter.title}</h3>
+            <p class="date-published">{frontmatter.date}</p>
             <MDXRenderer>{body}</MDXRenderer>
         </Layout>
     );
