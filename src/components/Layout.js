@@ -8,11 +8,19 @@ const AppStyles = styled.main`
     margin: 0 auto;
 `;
 
+const LineDiv = styled.div`
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+    position: relative;
+    bottom: 5vh;
+`;
+
 export const Layout = ({ children }) => {
     const { title, description } = useSiteMetadata();
     return (
         <AppStyles>
             <Header siteTitle={title} siteDescription={description} />
+            <LineDiv></LineDiv>
             {children}
         </AppStyles>
     );

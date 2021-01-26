@@ -1,5 +1,5 @@
 const siteMetadata = {
-    title: `Matijevic Dev Blog`,
+    title: `Matijevic`,
     description: `my dev blog`,
 };
 
