@@ -1,0 +1,14 @@
+# Dependencies
+node_modules
+
+# Build directory
+public
+
+# Other
+.DS_Store
+
+# Local Netlify folder
+.netlify
+
+# posts
+posts
