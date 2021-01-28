@@ -9,13 +9,15 @@ module.exports = {
         `gatsby-plugin-styled-components`,
         `gatsby-transformer-sharp`,
         `gatsby-plugin-sharp`,
-        // {
-        //     resolve: "gatsby-source-sanity",
-        //     options: {
-        //         projectId: "abc123",
-        //         dataset: "blog",
-        //     },
-        // },
+        {
+            resolve: "gatsby-source-sanity",
+            options: {
+                projectId: "hb88ttzp",
+                dataset: "production",
+                watchMode: true,
+                token: process.env.SANITY_TOKEN,
+            },
+        },
         {
             resolve: `gatsby-plugin-mdx`,
             options: {
