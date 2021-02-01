@@ -29,15 +29,7 @@ function mergePageEntry(cachedPage, newPageData) {
 
 class DevLoader extends _loader.BaseLoader {
   constructor(syncRequires, matchPaths) {
-    let loadComponent;
-
-    if (process.env.GATSBY_EXPERIMENTAL_LAZY_DEVJS) {
-      const ensureComponentInBundle = require(`./ensure-page-component-in-bundle`);
-
-      loadComponent = chunkName => ensureComponentInBundle.default(chunkName);
-    } else {
-      loadComponent = chunkName => Promise.resolve(syncRequires.components[chunkName]);
-    }
+    const loadComponent = chunkName => Promise.resolve(syncRequires.components[chunkName]);
 
     super(loadComponent, matchPaths);
     const socket = (0, _socketIo.default)();
@@ -49,8 +41,8 @@ class DevLoader extends _loader.BaseLoader {
           this.handleStaticQueryResultHotUpdate(msg);
         } else if (msg.type === `pageQueryResult`) {
           this.handlePageQueryResultHotUpdate(msg);
-        } else if (msg.type === `dirtyQueries`) {
-          this.handleDirtyPageQueryMessage(msg);
+        } else if (msg.type === `stalePageData`) {
+          this.handleStalePageDataMessage(msg);
         }
       });
     } else if (process.env.NODE_ENV !== `test`) {
@@ -74,7 +66,7 @@ class DevLoader extends _loader.BaseLoader {
       // when we can't find a proper 404.html we fallback to dev-404-page
       // we need to make sure to mark it as not found.
       if (data.status === _loader.PageResourceStatus.Error && rawPath !== `/dev-404-page/`) {
-        console.error(`404 page could not be found. Checkout https://www.gatsbyjs.org/docs/add-404-page/`);
+        console.error(`404 page could not be found. Checkout https://www.gatsbyjs.org/docs/how-to/adding-common-features/add-404-page/`);
         return this.loadPageDataJson(`/dev-404-page/`).then(result => Object.assign({}, data, result));
       }
 
@@ -110,6 +102,8 @@ class DevLoader extends _loader.BaseLoader {
     const cachedPageData = (_this$pageDataDb$get = this.pageDataDb.get(pageDataDbCacheKey)) === null || _this$pageDataDb$get === void 0 ? void 0 : _this$pageDataDb$get.payload;
 
     if (!(0, _isEqual.default)(newPageData, cachedPageData)) {
+      // TODO: if this is update for current page and there are any new static queries added
+      // that are not yet cached, there is currently no trigger to fetch them (yikes)
       // always update canonical key for pageDataDb
       this.pageDataDb.set(pageDataDbCacheKey, {
         pagePath: pageDataDbCacheKey,
@@ -148,8 +142,8 @@ class DevLoader extends _loader.BaseLoader {
     }
   }
 
-  handleDirtyPageQueryMessage(msg) {
-    msg.payload.dirtyQueries.forEach(dirtyQueryId => {
+  handleStalePageDataMessage(msg) {
+    msg.payload.stalePageDataPaths.forEach(dirtyQueryId => {
       if (dirtyQueryId === `/dev-404-page/` || dirtyQueryId === `/404.html`) {
         // those pages are not on demand so skipping
         return;

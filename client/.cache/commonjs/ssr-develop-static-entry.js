@@ -35,6 +35,7 @@ const testRequireError = (moduleName, err) => {
   return regex.test(firstLine);
 };
 
+const stats = JSON.parse(_fs.default.readFileSync(`${process.cwd()}/public/webpack.stats.json`, `utf-8`));
 let Html;
 
 try {
@@ -129,7 +130,58 @@ var _default = (pagePath, isClientOnlyPage, callback) => {
     };
 
     const pageData = getPageData(pagePath);
-    const componentChunkName = pageData === null || pageData === void 0 ? void 0 : pageData.componentChunkName;
+    const {
+      componentChunkName,
+      staticQueryHashes = []
+    } = pageData;
+    let scriptsAndStyles = (0, _lodash.flatten)([`commons`].map(chunkKey => {
+      const fetchKey = `assetsByChunkName[${chunkKey}]`;
+      let chunks = (0, _lodash.get)(stats, fetchKey);
+      const namedChunkGroups = (0, _lodash.get)(stats, `namedChunkGroups`);
+
+      if (!chunks) {
+        return null;
+      }
+
+      chunks = chunks.map(chunk => {
+        if (chunk === `/`) {
+          return null;
+        }
+
+        return {
+          rel: `preload`,
+          name: chunk
+        };
+      });
+      namedChunkGroups[chunkKey].assets.forEach(asset => chunks.push({
+        rel: `preload`,
+        name: asset
+      }));
+      const childAssets = namedChunkGroups[chunkKey].childAssets;
+
+      for (const rel in childAssets) {
+        chunks = (0, _lodash.concat)(chunks, childAssets[rel].map(chunk => {
+          return {
+            rel,
+            name: chunk
+          };
+        }));
+      }
+
+      return chunks;
+    })).filter(s => (0, _lodash.isObject)(s)).sort((s1, s2) => s1.rel == `preload` ? -1 : 1); // given priority to preload
+
+    scriptsAndStyles = (0, _lodash.uniqBy)(scriptsAndStyles, item => item.name);
+    const styles = scriptsAndStyles.filter(style => style.name && style.name.endsWith(`.css`));
+    styles.slice(0).reverse().forEach(style => {
+      headComponents.unshift( /*#__PURE__*/_react.default.createElement("link", {
+        "data-identity": `gatsby-dev-css`,
+        key: style.name,
+        rel: "stylesheet",
+        type: "text/css",
+        href: `${__PATH_PREFIX__}/${style.name}`
+      }));
+    });
     const createElement = _react.default.createElement;
 
     class RouteHandler extends _react.default.Component {
@@ -144,7 +196,16 @@ var _default = (pagePath, isClientOnlyPage, callback) => {
           // pathContext was deprecated in v2. Renamed to pageContext
           pathContext: pageData.result ? pageData.result.pageContext : undefined
         };
-        const pageElement = createElement(_ssrSyncRequires.default.ssrComponents[componentChunkName], props);
+        let pageElement;
+
+        if (_ssrSyncRequires.default.ssrComponents[componentChunkName] && !isClientOnlyPage) {
+          pageElement = createElement(_ssrSyncRequires.default.ssrComponents[componentChunkName], props);
+        } else {
+          // If this is a client-only page or the pageComponent didn't finish
+          // compiling yet, just render an empty component.
+          pageElement = () => null;
+        }
+
         const wrappedPage = (0, _apiRunnerSsr.default)(`wrapPageElement`, {
           element: pageElement,
           props
@@ -225,7 +286,7 @@ var _default = (pagePath, isClientOnlyPage, callback) => {
     return bodyHtml;
   };
 
-  const bodyStr = isClientOnlyPage ? `` : generateBodyHTML();
+  const bodyStr = generateBodyHTML();
 
   const htmlElement = /*#__PURE__*/_react.default.createElement(Html, { ...bodyProps,
     body: bodyStr,

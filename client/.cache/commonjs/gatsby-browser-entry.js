@@ -31,7 +31,7 @@ var _publicPageRenderer = _interopRequireDefault(require("./public-page-renderer
 
 exports.PageRenderer = _publicPageRenderer.default;
 
-var _loader = _interopRequireWildcard(require("./loader"));
+var _loader = _interopRequireDefault(require("./loader"));
 
 const prefetchPathname = _loader.default.enqueue;
 exports.prefetchPathname = prefetchPathname;
@@ -46,17 +46,7 @@ function StaticQueryDataRenderer({
   query,
   render
 }) {
-  let combinedStaticQueryData = staticQueryData;
-
-  if (process.env.GATSBY_EXPERIMENTAL_LAZY_DEVJS) {
-    // when we remove the flag, we don't need to combine them
-    // w/ changes @pieh made.
-    combinedStaticQueryData = { ...(0, _loader.getStaticQueryResults)(),
-      ...staticQueryData
-    };
-  }
-
-  const finalData = data ? data.data : combinedStaticQueryData[query] && combinedStaticQueryData[query].data;
+  const finalData = data ? data.data : staticQueryData[query] && staticQueryData[query].data;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, finalData && render(finalData), !finalData && /*#__PURE__*/_react.default.createElement("div", null, "Loading (StaticQuery)"));
 }
 
@@ -78,6 +68,8 @@ const StaticQuery = props => {
 exports.StaticQuery = StaticQuery;
 
 const useStaticQuery = query => {
+  var _context$query;
+
   if (typeof _react.default.useContext !== `function` && process.env.NODE_ENV === `development`) {
     throw new Error(`You're likely using a version of React that doesn't support Hooks\n` + `Please update React and ReactDOM to 16.8.0 or later to use the useStaticQuery hook.`);
   }
@@ -96,38 +88,11 @@ useStaticQuery(graphql\`${query}\`);
 `);
   }
 
-  let queryNotFound = false;
-
-  if (process.env.GATSBY_EXPERIMENTAL_LAZY_DEVJS) {
-    var _staticQueryData$quer;
-
-    // Merge data loaded via socket.io & xhr
-    // when we remove the flag, we don't need to combine them
-    // w/ changes @pieh made.
-    const staticQueryData = { ...(0, _loader.getStaticQueryResults)(),
-      ...context
-    };
-
-    if ((_staticQueryData$quer = staticQueryData[query]) === null || _staticQueryData$quer === void 0 ? void 0 : _staticQueryData$quer.data) {
-      return staticQueryData[query].data;
-    } else {
-      queryNotFound = true;
-    }
+  if ((_context$query = context[query]) === null || _context$query === void 0 ? void 0 : _context$query.data) {
+    return context[query].data;
   } else {
-    var _context$query;
-
-    if ((_context$query = context[query]) === null || _context$query === void 0 ? void 0 : _context$query.data) {
-      return context[query].data;
-    } else {
-      queryNotFound = true;
-    }
-  }
-
-  if (queryNotFound) {
     throw new Error(`The result of this StaticQuery could not be fetched.\n\n` + `This is likely a bug in Gatsby and if refreshing the page does not fix it, ` + `please open an issue in https://github.com/gatsbyjs/gatsby/issues`);
   }
-
-  return null;
 };
 
 exports.useStaticQuery = useStaticQuery;

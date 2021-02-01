@@ -2,19 +2,22 @@ import React from "react";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { graphql, Link } from "gatsby";
 import { Layout } from "../components/Layout";
+// import { PortableText } from "../components/PortableText";
 
 export default ({ data, pageContext }) => {
-    const { frontmatter, body } = data.mdx;
+    const { body, title, publishedAt } = data.allSanityPost.nodes[0];
+    const { text } = body[0].children[0];
     const { previous, next } = pageContext;
+    console.log("------------------- ", body, title, publishedAt);
     return (
         <Layout>
             {previous && (
-                <Link to={`/blog${previous.fields.slug}`}>previous post</Link>
+                <Link to={`/blog/${previous.slug.current}`}>previous post</Link>
             )}
-            {next && <Link to={`/blog${next.fields.slug}`}>next post</Link>}
-            <h3>{frontmatter.title}</h3>
-            <p>{frontmatter.date}</p>
-            <MDXRenderer>{body}</MDXRenderer>
+            {next && <Link to={`/blog/${next.slug.current}`}>next post</Link>}
+            {/* <h3>{frontmatter.title}</h3>
+            <p>{frontmatter.date}</p> */}
+            {/* <PortableText blocks={body}>texrrt</PortableText> */}
         </Layout>
     );
 };
@@ -23,11 +26,16 @@ export default ({ data, pageContext }) => {
 export const query = graphql`
     query PostsBySlug($slug: String!) {
         # filtering - retrieve only mdx files with slug passed in
-        mdx(fields: { slug: { eq: $slug } }) {
-            body
-            frontmatter {
+        allSanityPost(filter: { slug: { current: { eq: $slug } } }) {
+            nodes {
+                id
                 title
-                date(formatString: "MMMM Do, YYYY")
+                publishedAt(fromNow: true)
+                body {
+                    children {
+                        text
+                    }
+                }
             }
         }
     }

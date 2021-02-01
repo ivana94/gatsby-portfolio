@@ -154,25 +154,6 @@ class BaseLoader {
 
           if (jsonPayload.path === undefined) {
             throw new Error(`not a valid pageData response`);
-          } // In development, check if the page is in the bundle yet.
-
-
-          if (process.env.NODE_ENV === `development` && process.env.GATSBY_EXPERIMENTAL_LAZY_DEVJS) {
-            const ensureComponentInBundle = require(`./ensure-page-component-in-bundle`).default;
-
-            if (process.env.NODE_ENV !== `test`) {
-              delete require.cache[require.resolve(`$virtual/lazy-client-sync-requires`)];
-            }
-
-            const lazyRequires = require(`$virtual/lazy-client-sync-requires`);
-
-            if (lazyRequires.notVisitedPageComponents[jsonPayload.componentChunkName]) {
-              // Tell the server the user wants to visit this page
-              // to trigger it including the page component's code in the
-              // commons bundles.
-              ensureComponentInBundle(jsonPayload.componentChunkName);
-              return new Promise(resolve => setTimeout(() => resolve(this.fetchPageDataJson(loadObj)), 100));
-            }
           }
 
           return Object.assign(loadObj, {
@@ -227,7 +208,7 @@ class BaseLoader {
     if (this.pageDataDb.has(pagePath)) {
       const pageData = this.pageDataDb.get(pagePath);
 
-      if (!process.env.GATSBY_EXPERIMENTAL_QUERY_ON_DEMAND || !pageData.stale) {
+      if (process.env.BUILD_STAGE !== `develop` || !pageData.stale) {
         return Promise.resolve(pageData);
       }
     }
@@ -251,7 +232,7 @@ class BaseLoader {
     if (this.pageDb.has(pagePath)) {
       const page = this.pageDb.get(pagePath);
 
-      if (!process.env.GATSBY_EXPERIMENTAL_QUERY_ON_DEMAND || !page.payload.stale) {
+      if (process.env.BUILD_STAGE !== `develop` || !page.payload.stale) {
         return Promise.resolve(page.payload);
       }
     }

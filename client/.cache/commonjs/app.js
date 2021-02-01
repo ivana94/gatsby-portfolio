@@ -2,6 +2,9 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+exports.__esModule = true;
+exports.notCalledFunction = notCalledFunction;
+
 var _interopRequireWildcard2 = _interopRequireDefault(require("@babel/runtime/helpers/interopRequireWildcard"));
 
 var _react = _interopRequireDefault(require("react"));
@@ -20,21 +23,22 @@ var _apiRunnerBrowser = require("./api-runner-browser");
 
 var _loader = require("./loader");
 
+var _indicator = require("./loading-indicator/indicator");
+
 var _devLoader = _interopRequireDefault(require("./dev-loader"));
+
+var _syncRequires = _interopRequireDefault(require("$virtual/sync-requires"));
 
 var _matchPaths = _interopRequireDefault(require("$virtual/match-paths.json"));
 
 // Generated during bootstrap
-window.___emitter = _emitter.default;
-let pageComponentRequires;
-
-if (process.env.GATSBY_EXPERIMENTAL_LAZY_DEVJS) {
-  pageComponentRequires = require(`$virtual/lazy-client-sync-requires`);
-} else {
-  pageComponentRequires = require(`$virtual/sync-requires`);
+if (process.env.GATSBY_HOT_LOADER === `fast-refresh` && module.hot) {
+  module.hot.accept(`$virtual/sync-requires`, () => {// Manually reload
+  });
 }
 
-const loader = new _devLoader.default(pageComponentRequires, _matchPaths.default);
+window.___emitter = _emitter.default;
+const loader = new _devLoader.default(_syncRequires.default, _matchPaths.default);
 (0, _loader.setLoader)(loader);
 loader.setApiRunner(_apiRunnerBrowser.apiRunner);
 window.___loader = _loader.publicLoader; // Do dummy dynamic import so the jsonp __webpack_require__.e is added to the commons.js
@@ -44,9 +48,11 @@ window.___loader = _loader.publicLoader; // Do dummy dynamic import so the jsonp
 // Without this, the runtime breaks with a
 // "TypeError: __webpack_require__.e is not a function"
 // error.
-// eslint-disable-next-line
 
-Promise.resolve().then(() => (0, _interopRequireWildcard2.default)(require("./dummy"))); // Let the site/plugins run code very early.
+function notCalledFunction() {
+  return Promise.resolve().then(() => (0, _interopRequireWildcard2.default)(require(`./dummy`)));
+} // Let the site/plugins run code very early.
+
 
 (0, _apiRunnerBrowser.apiRunnerAsync)(`onClientEntry`).then(() => {
   // Hook up the client to socket.io on server
@@ -99,14 +105,40 @@ Promise.resolve().then(() => (0, _interopRequireWildcard2.default)(require("./du
   }
 
   const rootElement = document.getElementById(`___gatsby`);
-  const renderer = (0, _apiRunnerBrowser.apiRunner)(`replaceHydrateFunction`, undefined, // TODO replace with hydrate once dev SSR is ready
-  // but only for SSRed pages.
-  _reactDom.default.render)[0];
+  const renderer = (0, _apiRunnerBrowser.apiRunner)(`replaceHydrateFunction`, undefined, // Client only pages have any empty body so we just do a normal
+  // render to avoid React complaining about hydration mis-matches.
+  document.getElementById(`___gatsby`).children.length === 0 ? _reactDom.default.render : _reactDom.default.hydrate)[0];
+  let dismissLoadingIndicator;
+
+  if (process.env.GATSBY_EXPERIMENTAL_QUERY_ON_DEMAND && process.env.GATSBY_QUERY_ON_DEMAND_LOADING_INDICATOR === `true`) {
+    let indicatorMountElement;
+    const showIndicatorTimeout = setTimeout(() => {
+      indicatorMountElement = document.createElement(`first-render-loading-indicator`);
+      document.body.append(indicatorMountElement);
+
+      _reactDom.default.render( /*#__PURE__*/_react.default.createElement(_indicator.Indicator, null), indicatorMountElement);
+    }, 1000);
+
+    dismissLoadingIndicator = () => {
+      clearTimeout(showIndicatorTimeout);
+
+      if (indicatorMountElement) {
+        _reactDom.default.unmountComponentAtNode(indicatorMountElement);
+
+        indicatorMountElement.remove();
+      }
+    };
+  }
+
   Promise.all([loader.loadPage(`/dev-404-page/`), loader.loadPage(`/404.html`), loader.loadPage(window.location.pathname)]).then(() => {
     const preferDefault = m => m && m.default || m;
 
     const Root = preferDefault(require(`./root`));
     (0, _domready.default)(() => {
+      if (dismissLoadingIndicator) {
+        dismissLoadingIndicator();
+      }
+
       renderer( /*#__PURE__*/_react.default.createElement(Root, null), rootElement, () => {
         (0, _apiRunnerBrowser.apiRunner)(`onInitialClientRender`);
       });

@@ -37,91 +37,76 @@ const PostWrapper = styled.div`
     }
 `;
 
-const Image = styled(Img)`
+const ImageStyles = styled(Img)`
     width: 100%;
     height: 20vh;
 `;
 
 export default ({ data }) => {
-    const { posts } = useStaticQuery(graphql`
-        query {
-            posts: allSanityPost {
-                nodes {
-                    id
-                    title
-                    publishedAt
-                    body {
-                        children {
-                            text
-                        }
-                    }
-                    author {
-                        children {
-                            id
-                        }
-                        name
-                    }
-                }
-            }
-        }
-    `);
-    console.log("------- ", posts);
     return (
         <>
             <Layout>
                 <IndexWrapper>
-                    {/* {data.allMdx.nodes.map(
-                        ({ id, excerpt, frontmatter, fields }) => (
+                    {data.posts.nodes.map(
+                        ({ id, body, title, publishedAt, slug, mainImage }) => (
                             <PostWrapper key={id}>
-                                <Link to={`/blog${fields.slug}`}>
-                                    {!!frontmatter.cover ? (
-                                        <Image
-                                            fluid={
-                                                frontmatter.cover
-                                                    .childImageSharp.fluid
-                                            }
+                                <Link to={`/blog/${slug.current}`}>
+                                    {!!mainImage.asset ? (
+                                        <ImageStyles
+                                            fluid={mainImage.asset.fluid}
+                                            alt={title}
                                         />
                                     ) : null}
-                                    <h3>{frontmatter.title}</h3>
-                                    <p>{excerpt}</p>
+                                    <h3>{title}</h3>
+                                    <p>{body[0].children[0].text}</p>
                                     <p className="date-published">
-                                        {frontmatter.date}
+                                        {publishedAt}
                                     </p>
                                 </Link>
                             </PostWrapper>
                         )
-                    )} */}
+                    )}
                 </IndexWrapper>
             </Layout>
         </>
     );
 };
 
-// export const query = graphql`
-//     query SITE_INDEX_QUERY {
-//         allMdx(
-//             sort: { fields: [frontmatter___date], order: DESC }
-//             filter: { frontmatter: { published: { eq: true } } }
-//         ) {
-//             nodes {
-//                 id
-//                 excerpt(pruneLength: 250)
-//                 frontmatter {
-//                     title
-//                     date(formatString: "YYYY MMMM Do")
-//                     cover {
-//                         publicURL
-//                         childImageSharp {
-//                             fluid {
-//                                 ...GatsbyImageSharpFluid
-//                             }
-//                         }
-//                     }
-//                 }
-//                 fields {
-//                     slug
-//                 }
-//             }
-//         }
-//     }
-// `;
+export const query = graphql`
+    query {
+        posts: allSanityPost {
+            nodes {
+                id
+                title
+                publishedAt(fromNow: true)
+                mainImage {
+                    asset {
+                        fluid(maxWidth: 300) {
+                            ...GatsbySanityImageFluid
+                        }
+                    }
+                }
+                author {
+                    name
+                    image {
+                        asset {
+                            fluid {
+                                base64
+                                srcWebp
+                                srcSetWebp
+                            }
+                        }
+                    }
+                }
+                slug {
+                    current
+                }
+                body {
+                    children {
+                        text
+                    }
+                }
+            }
+        }
+    }
+`;

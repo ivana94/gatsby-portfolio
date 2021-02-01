@@ -8,16 +8,13 @@ exports.createPages = ({ actions, graphql }) => {
     // 1. query the data - figure out which pages need to be created
     return graphql(`
         {
-            allMdx(
-                sort: { fields: [frontmatter___date], order: DESC }
-                filter: { frontmatter: { published: { eq: true } } }
-            ) {
+            allSanityPost(sort: { fields: [publishedAt], order: DESC }) {
                 nodes {
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        title
+                    id
+                    title
+                    publishedAt(fromNow: true)
+                    slug {
+                        current
                     }
                 }
             }
@@ -27,17 +24,17 @@ exports.createPages = ({ actions, graphql }) => {
             throw result.errors;
         }
 
-        const posts = result.data.allMdx.nodes;
+        const posts = result.data.allSanityPost.nodes;
 
         // 2. create the pages using
         posts.forEach((post, idx) => {
             createPage({
                 // Path for this page — required
-                path: `blog${post.fields.slug}`,
+                path: `blog/${post.slug.current}`,
                 component: blogPostTemplate,
                 // optional -- context is for passing props to page
                 context: {
-                    slug: post.fields.slug,
+                    slug: post.slug.current,
                     previous: idx === posts.length - 1 ? null : posts[idx + 1],
                     next: idx === 0 ? null : posts[idx - 1],
                 },
@@ -49,6 +46,7 @@ exports.createPages = ({ actions, graphql }) => {
 exports.onCreateNode = ({ node, actions, getNode }) => {
     const { createNodeField } = actions;
     // if runs if the node that was created/updated is mdx
+    console.log("------- ", node);
     if (node.internal.type === `Mdx`) {
         // the following returns our slug
         // it traverses the node to find its "File" parent
