@@ -46,7 +46,6 @@ exports.createPages = ({ actions, graphql }) => {
 exports.onCreateNode = ({ node, actions, getNode }) => {
     const { createNodeField } = actions;
     // if runs if the node that was created/updated is mdx
-    console.log("------- ", node);
     if (node.internal.type === `Mdx`) {
         // the following returns our slug
         // it traverses the node to find its "File" parent

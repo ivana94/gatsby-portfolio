@@ -1,9 +1,10 @@
 import React from "react";
+import Code from "./Code";
 
-const serializers = {
+export const serializers = {
     types: {
-        authorReference: ({ node }) => <span>Ivanaaaa</span>,
+        authorReference: ({ node }) => <span>{node.author.name}</span>,
+        // mainImage: Figure,
+        code: Code,
     },
 };
-
-export default serializers;

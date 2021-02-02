@@ -1,5 +1,5 @@
 import React from "react";
-import { useStaticQuery, graphql, Link } from "gatsby";
+import { graphql, Link } from "gatsby";
 import Img from "gatsby-image";
 import styled from "styled-components";
 import { Layout } from "../components/Layout";
@@ -42,7 +42,7 @@ const ImageStyles = styled(Img)`
     height: 20vh;
 `;
 
-export default ({ data }) => {
+const Blog = ({ data }) => {
     return (
         <>
             <Layout>
@@ -110,3 +110,5 @@ export const query = graphql`
         }
     }
 `;
+
+export default Blog;
