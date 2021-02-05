@@ -10,7 +10,7 @@ import category from "./category";
 import post from "./post";
 import author from "./author";
 import bodyPortableText from "./objects/bodyPortableText";
-import mainImage from "./objects/mainImage";
+import postImage from "./objects/postImage";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -28,6 +28,6 @@ export default createSchema({
         // { type: 'typename' } in other document schemas
         blockContent,
         bodyPortableText,
-        mainImage,
+        postImage,
     ]),
 });

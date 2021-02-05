@@ -1,6 +1,6 @@
 export default {
-    title: "mainImage",
-    name: "mainImage",
+    title: "postImage",
+    name: "postImage",
     type: "image",
     options: {
         hotspot: true, // <-- Defaults to false
