@@ -6,7 +6,6 @@ const Code = ({ node }) => {
         return null;
     }
     const { language, code } = node;
-    console.log("---", code);
     return (
         <SyntaxHighlighter language={language || "text"}>
             {code}

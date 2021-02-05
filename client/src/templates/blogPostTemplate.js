@@ -31,9 +31,13 @@ const ImageStyles = styled(Img)`
 `;
 
 const BlogPostTemplate = ({ data, pageContext }) => {
-    const { body, title, publishedAt, mainImage } = data.allSanityPost.nodes[0];
+    const {
+        title,
+        publishedAt,
+        mainImage,
+        _rawBody,
+    } = data.allSanityPost.nodes[0];
     const { previous, next } = pageContext;
-    console.log(mainImage);
     return (
         <Layout>
             {previous && (
@@ -44,14 +48,10 @@ const BlogPostTemplate = ({ data, pageContext }) => {
             <H3Styles>{title}</H3Styles>
             <ParagraphStyles>published {publishedAt}</ParagraphStyles>
             <BlogPostWrapper>
-                {!!body.length &&
-                    body.map((block, idx) => (
-                        <PortableText
-                            blocks={block}
-                            serializers={serializers}
-                            key={idx}
-                        ></PortableText>
-                    ))}
+                <PortableText
+                    blocks={_rawBody}
+                    serializers={serializers}
+                ></PortableText>
             </BlogPostWrapper>
         </Layout>
     );
@@ -65,6 +65,7 @@ export const query = graphql`
             nodes {
                 _key
                 _type
+                _rawBody
                 id
                 title
                 publishedAt(fromNow: true)
@@ -73,18 +74,6 @@ export const query = graphql`
                         fluid(maxWidth: 300) {
                             ...GatsbySanityImageFluid
                         }
-                    }
-                }
-                body {
-                    _key
-                    _type
-                    _rawChildren
-                    style
-                    list
-                    children {
-                        text
-                        _type
-                        _key
                     }
                 }
             }
