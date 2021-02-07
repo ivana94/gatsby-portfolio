@@ -5,15 +5,19 @@ import clientConfig from "../../client-config";
 
 const Figure = ({ node }) => {
     const fluidProps = getFluidGatsbyImage(
-        node.asset._id,
-        { maxWidth: 670 },
-        ...clientConfig.sanity
+        node.asset._ref,
+        {
+            maxWidth: 670,
+        },
+        clientConfig.sanity
     );
     return (
-        <figure>
-            <Img fluid={fluidProps} alt={node.alt} />
+        <>
+            <figure>
+                <Img fluid={fluidProps} alt={node.alt} />
+            </figure>
             <caption>{node.caption}</caption>
-        </figure>
+        </>
     );
 };
 
