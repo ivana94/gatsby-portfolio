@@ -20,7 +20,7 @@ export const Layout = ({ children }) => {
     return (
         <AppStyles>
             <Header siteTitle={title} siteDescription={description} />
-            <LineDiv></LineDiv>
+            {/* <LineDiv></LineDiv> */}
             {children}
         </AppStyles>
     );

@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 
 const HeaderStyles = styled.header`
-    border-bottom: 2px solid #000;
+    /* border-bottom: 2px solid #000; */
     margin: 5vh 0 10vh 0;
     display: flex;
     a {
@@ -20,12 +20,19 @@ const H1Styles = styled.h1`
 `;
 
 const NavStyles = styled.nav`
-    font-size: 1.2rem;
+    font-size: 0.8rem;
     display: flex;
     flex-direction: row-reverse;
     width: 100%;
     a {
         margin-left: 5vw;
+        transition: all 1s;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+        transition: all 1s;
     }
 `;
 
