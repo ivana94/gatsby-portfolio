@@ -1,11 +1,23 @@
 import React from "react";
 import { Layout } from "../components/Layout";
 import { graphql } from "gatsby";
+import Img from "gatsby-image";
 import styled from "styled-components";
 
 const MainStyles = styled.main`
-    width: 60vw;
-    margin: 10% auto;
+    width: 80vw;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    h1 {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+            Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-90%, -90%);
+    }
 `;
 
 const SideNoteStyles = styled.div`
@@ -17,24 +29,38 @@ const UpArrowStyles = styled.span`
     color: red;
 `;
 
+const ImageStyles = styled(Img)`
+    /* position: absolute; */
+    filter: grayscale(100%) blur(2px);
+    opacity: 0.5;
+    width: 100%;
+    height: 50vh;
+`;
+
+const PurpleBackgroundDiv = styled.div`
+    background: violet;
+    opacity: 0.2;
+    width: 100%;
+    height: 50vh;
+`;
+
 const Main = ({ data }) => {
-    console.log("---- ", data);
     return (
-        <>
-            <Layout>
-                <MainStyles>
-                    <SideNoteStyles>
+        <Layout>
+            <MainStyles>
+                <PurpleBackgroundDiv></PurpleBackgroundDiv>
+                {/* <ImageStyles
+                    fluid={data.fileName.childImageSharp.fluid}
+                ></ImageStyles> */}
+                {/* <SideNoteStyles>
                         <span>(she/her)</span>
                         <UpArrowStyles>^</UpArrowStyles>
-                    </SideNoteStyles>
-                    <h1>
-                        I'm Ivana (she/her). I'm a full stack web developer
-                        based in Berlin. I specialize in building user
-                        interfaces using React, Vue, Node, Jest, and more!
-                    </h1>
-                </MainStyles>
-            </Layout>
-        </>
+                    </SideNoteStyles> */}
+                <h1>
+                    I'm Ivana. I'm a full stack web developer based in Berlin.
+                </h1>
+            </MainStyles>
+        </Layout>
     );
 };
 
@@ -43,7 +69,7 @@ export default Main;
 // Copycopy code to clipboard
 export const query = graphql`
     query {
-        fileName: file(relativePath: { eq: "images/cactus.jpg" }) {
+        fileName: file(relativePath: { eq: "me.jpeg" }) {
             childImageSharp {
                 fluid(maxWidth: 400, maxHeight: 250) {
                     ...GatsbyImageSharpFluid

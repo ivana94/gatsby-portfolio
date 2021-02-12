@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 
 const HeaderStyles = styled.header`
-    /* border-bottom: 2px solid #000; */
+    border-bottom: 2px solid #000;
     margin: 5vh 0 10vh 0;
     display: flex;
     a {
@@ -42,8 +42,8 @@ export const Header = ({ siteTitle, siteDescription }) => (
             <H1Styles>{siteTitle}</H1Styles>
         </Link>
         <NavStyles>
-            <Link to="/about">
-                <H1Styles>about</H1Styles>
+            <Link to="/projects">
+                <H1Styles>projects</H1Styles>
             </Link>
             <Link to="/blog">
                 <H1Styles>blog</H1Styles>
