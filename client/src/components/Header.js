@@ -6,48 +6,24 @@ const HeaderStyles = styled.header`
     border-bottom: 2px solid #000;
     margin: 5vh 0 10vh 0;
     display: flex;
-    a {
-        text-decoration: none;
-    }
-`;
-
-const H1Styles = styled.h1`
-    font-family: Georgia;
-    font-weight: 400;
-    letter-spacing: 1px;
-    text-decoration: none;
-    color: #000;
-`;
-
-const NavStyles = styled.nav`
-    font-size: 0.8rem;
-    display: flex;
-    flex-direction: row-reverse;
-    width: 100%;
-    a {
-        margin-left: 5vw;
-        transition: all 1s;
-        text-decoration: none;
-    }
-
-    a:hover {
-        text-decoration: underline;
-        transition: all 1s;
-    }
 `;
 
 export const Header = ({ siteTitle, siteDescription }) => (
     <HeaderStyles>
         <Link to="/">
-            <H1Styles>{siteTitle}</H1Styles>
+            <h1 className="font-mono text-2xl tracking-wide">{siteTitle}</h1>
         </Link>
-        <NavStyles>
+        <nav className="flex flex-row-reverse w-full">
             <Link to="/projects">
-                <H1Styles>projects</H1Styles>
+                <h3 className="font-mono text-xl tracking-wide mx-5 hover:underline">
+                    projects
+                </h3>
             </Link>
             <Link to="/blog">
-                <H1Styles>blog</H1Styles>
+                <h3 className="font-mono text-xl tracking-wide mx-5 hover:underline">
+                    blog
+                </h3>
             </Link>
-        </NavStyles>
+        </nav>
     </HeaderStyles>
 );

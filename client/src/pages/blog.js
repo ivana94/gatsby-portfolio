@@ -46,10 +46,10 @@ const Blog = ({ data }) => {
     return (
         <>
             <Layout>
-                <IndexWrapper>
+                <div className="container flex flex-col md:flex-row lg:flex-row md:flex-wrap lg:flex-wrap md:flex-1 lg:flex-1">
                     {data.posts.nodes.map(
                         ({ id, body, title, publishedAt, slug, mainImage }) => (
-                            <PostWrapper key={id}>
+                            <div className="mx-5 w-80" key={id}>
                                 <Link to={`/blog/${slug.current}`}>
                                     {!!mainImage.asset ? (
                                         <ImageStyles
@@ -57,16 +57,17 @@ const Blog = ({ data }) => {
                                             alt={title}
                                         />
                                     ) : null}
-                                    <h3>{title}</h3>
-                                    <p>{body[0].children[0].text}</p>
-                                    <p className="date-published">
-                                        {publishedAt}
+                                    <h3 className="my-2 text-2xl font-serif font-medium text-gray-800">
+                                        {title}
+                                    </h3>
+                                    <p className="font-sans text-md text-gray-500">
+                                        {body[0].children[0].text}
                                     </p>
                                 </Link>
-                            </PostWrapper>
+                            </div>
                         )
                     )}
-                </IndexWrapper>
+                </div>
             </Layout>
         </>
     );

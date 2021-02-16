@@ -49,7 +49,18 @@ const Main = ({ data }) => {
     return (
         <Layout>
             <main className="bg-gray-100 dark:bg-gray-800">
-                <Hero />
+                <PurpleBackgroundDiv></PurpleBackgroundDiv>
+                {/* <Hero /> */}
+                {/* <ImageStyles
+                    fluid={data.fileName.childImageSharp.fluid}
+                ></ImageStyles> */}
+                {/* <SideNoteStyles>
+                        <span>(she/her)</span>
+                        <UpArrowStyles>^</UpArrowStyles>
+                    </SideNoteStyles> */}
+                <h1>
+                    I'm Ivana. I'm a full stack web developer based in Berlin.
+                </h1>
             </main>
         </Layout>
     );
