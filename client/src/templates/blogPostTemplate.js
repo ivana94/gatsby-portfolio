@@ -3,13 +3,9 @@ import { graphql, Link } from "gatsby";
 import styled from "styled-components";
 import Img from "gatsby-image";
 import { Layout } from "../components/Layout";
+import { Arrows } from "../components/Arrows";
 import { PortableText } from "../components/PortableText";
 import { serializers } from "../components/serializers";
-
-const PostWrapper = styled.main`
-    width: 60%;
-    margin: 0 auto;
-`;
 
 const BlogPostWrapper = styled.section`
     color: #000;
@@ -30,15 +26,10 @@ const H3Styles = styled.h3`
     font-size: 2rem;
 `;
 
-const ParagraphStyles = styled.p`
-    color: #333;
-    font-family: "PT Sans", Arial, sans-serif;
-    font-size: 1.1rem;
-`;
-
 const ImageStyles = styled(Img)`
     width: 100%;
     height: 60vh;
+    border-radius: 5px;
 `;
 
 const BlogPostTemplate = ({ data, pageContext }) => {
@@ -51,21 +42,18 @@ const BlogPostTemplate = ({ data, pageContext }) => {
     const { previous, next } = pageContext;
     return (
         <Layout>
-            {previous && (
-                <Link to={`/blog/${previous.slug.current}`}>previous post</Link>
-            )}
-            {next && <Link to={`/blog/${next.slug.current}`}>next post</Link>}
+            <Arrows next={next} previous={previous} />
             <ImageStyles fluid={mainImage.asset.fluid} alt={title} />
-            <PostWrapper>
-                <H3Styles>{title}</H3Styles>
-                <ParagraphStyles>published {publishedAt}</ParagraphStyles>
+            <div className="container w-8/12">
+                <h3 className="text-3xl tracking-wide my-5">{title}</h3>
+                <p className="text-gray-500 mb-5">published {publishedAt}</p>
                 <BlogPostWrapper>
                     <PortableText
                         blocks={_rawBody}
                         serializers={serializers}
                     ></PortableText>
                 </BlogPostWrapper>
-            </PostWrapper>
+            </div>
         </Layout>
     );
 };
