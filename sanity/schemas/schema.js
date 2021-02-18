@@ -8,6 +8,7 @@ import schemaTypes from "all:part:@sanity/base/schema-type";
 import blockContent from "./documents/blockContent";
 import category from "./documents/category";
 import post from "./documents/post";
+import project from "./documents/project";
 import author from "./documents/author";
 import bodyPortableText from "./objects/bodyPortableText";
 import mainImage from "./objects/mainImage";
@@ -23,6 +24,7 @@ export default createSchema({
         // The following are document types which will appear
         // in the studio.
         post,
+
         author,
         category,
         // When added to this list, object types can be used as
@@ -30,6 +32,7 @@ export default createSchema({
         blockContent,
         bodyPortableText,
         mainImage,
+        project,
         excerptPortableText,
     ]),
 });

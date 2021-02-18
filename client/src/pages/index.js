@@ -48,7 +48,7 @@ const PurpleBackgroundDiv = styled.div`
 const Main = ({ data }) => {
     return (
         <Layout>
-            <main className="bg-gray-100 dark:bg-gray-800">
+            <main>
                 <PurpleBackgroundDiv></PurpleBackgroundDiv>
                 {/* <Hero /> */}
                 {/* <ImageStyles
@@ -58,9 +58,9 @@ const Main = ({ data }) => {
                         <span>(she/her)</span>
                         <UpArrowStyles>^</UpArrowStyles>
                     </SideNoteStyles> */}
-                <h1>
+                <h3 className="text-3xl relative bottom-10">
                     I'm Ivana. I'm a full stack web developer based in Berlin.
-                </h1>
+                </h3>
             </main>
         </Layout>
     );
