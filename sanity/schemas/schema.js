@@ -24,7 +24,7 @@ export default createSchema({
         // The following are document types which will appear
         // in the studio.
         post,
-
+        project,
         author,
         category,
         // When added to this list, object types can be used as
@@ -32,7 +32,6 @@ export default createSchema({
         blockContent,
         bodyPortableText,
         mainImage,
-        project,
         excerptPortableText,
     ]),
 });
