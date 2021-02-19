@@ -1,26 +1,36 @@
 import React from "react";
-import { Layout } from "../components/Layout";
+import { graphql, Link } from "gatsby";
 import Img from "gatsby-image";
+import styled from "styled-components";
+import { Layout } from "../components/Layout";
+
+const ImageStyles = styled(Img)`
+    width: 100%;
+    height: 20vh;
+`;
 
 const Projects = ({ data }) => {
     return (
         <>
             <Layout>
-                <h1>
-                    Hello! I'm Ivana{" "}
-                    <span role="img" aria-label="emoji of a hand waving">
-                        👋
-                    </span>
-                </h1>
-                {data.projects.nodes.map(
-                    ({ body, id, mainImage, slug, title }) => (
-                        <div key={id}>
-                            <h3>{title}</h3>
-                            <Img fluid={mainImage.asset.fluid} alt={title} />
-                            <p>{body[0].children[0].text}</p>
-                        </div>
-                    )
-                )}
+                <div className="container flex flex-col md:flex-row lg:flex-row md:flex-wrap lg:flex-wrap md:flex-1 lg:flex-1">
+                    {data.projects.nodes.map(
+                        ({ body, id, mainImage, slug, title }) => (
+                            <div className="mx-5 w-80" key={id}>
+                                <ImageStyles
+                                    fluid={mainImage.asset.fluid}
+                                    alt={title}
+                                />
+                                <h3 className="my-2 text-2xl font-serif font-medium text-gray-800">
+                                    {title}
+                                </h3>
+                                <p className="font-sans text-md text-gray-500">
+                                    {body[0].children[0].text}
+                                </p>
+                            </div>
+                        )
+                    )}
+                </div>
             </Layout>
         </>
     );
