@@ -58,7 +58,7 @@ const Main = ({ data }) => {
                         <span>(she/her)</span>
                         <UpArrowStyles>^</UpArrowStyles>
                     </SideNoteStyles> */}
-                <h3 className="text-3xl relative bottom-10">
+                <h3 className="text-5xl relative bottom-10">
                     I'm Ivana. I'm a full stack web developer based in Berlin.
                 </h3>
             </main>
