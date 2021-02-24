@@ -18,10 +18,11 @@ const LineDiv = styled.div`
 
 export const Layout = ({ children }) => {
     const { title, description } = useSiteMetadata();
+    const handleDarkMode = () => {};
     return (
         <AppStyles>
+            <button onClick={handleDarkMode}>dark mode</button>
             <Header siteTitle={title} siteDescription={description} />
-            {/* <LineDiv></LineDiv> */}
             {children}
         </AppStyles>
     );
