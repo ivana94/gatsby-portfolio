@@ -57,7 +57,7 @@ const Main = ({ data }) => {
                         <UpArrowStyles>^</UpArrowStyles>
                     </SideNoteStyles> */}
                 <h3 className="text-4xl relative bottom-10">
-                    I'm Ivana. I'm a full stack web developer based in Berlin.
+                    I'm a Software Engineer based in New York.
                 </h3>
             </main>
         </Layout>

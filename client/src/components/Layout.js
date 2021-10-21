@@ -1,29 +1,52 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
+
 import { useSiteMetadata } from "../hooks/useSiteMetadata";
 import { Header } from "./Header";
 
 const AppStyles = styled.div`
+    background: white;
+    height: 85vh;
     width: 85vw;
-    height: 100vh;
-    margin: 0 auto;
+    padding: 20px;
+    border: 5px solid black;
+    border-radius: 2px;
+    box-shadow: 10px 10px 0px 0px black;
 `;
 
 const LineDiv = styled.div`
-    border-bottom: 1px solid black;
+    width: calc(100% + 40px);
+    height: 10px;
     margin-bottom: 10px;
     position: relative;
-    bottom: 5vh;
+    bottom: 10vh;
+    left: -20px;
+    background: black;
+}
+`;
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background: #8c73ff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const Layout = ({ children }) => {
     const { title, description } = useSiteMetadata();
     const handleDarkMode = () => {};
     return (
-        <AppStyles>
-            <button onClick={handleDarkMode}>dark mode</button>
-            <Header siteTitle={title} siteDescription={description} />
-            {children}
-        </AppStyles>
+        <React.Fragment>
+            <GlobalStyle />
+            <AppStyles>
+                <button onClick={handleDarkMode}>dark mode</button>
+                <Header siteTitle={title} siteDescription={description} />
+                <LineDiv />
+                {children}
+            </AppStyles>
+        </React.Fragment>
     );
 };
