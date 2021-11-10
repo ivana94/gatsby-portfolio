@@ -23,6 +23,11 @@ export const Header = ({ siteTitle, siteDescription }) => (
                     blog
                 </h3>
             </Link>
+            <Link to="/about">
+                <h3 className="font-mono text-xl tracking-wide mx-5 hover:underline">
+                    about
+                </h3>
+            </Link>
         </nav>
     </HeaderStyles>
 );

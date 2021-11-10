@@ -1,5 +1,5 @@
 import React from "react";
-import { graphql, Link } from "gatsby";
+import { graphql } from "gatsby";
 import styled from "styled-components";
 import Img from "gatsby-image";
 import { Layout } from "../components/Layout";
@@ -18,12 +18,6 @@ const BlogPostWrapper = styled.section`
         line-height: 1.5rem;
         color: #444;
     }
-`;
-
-const H3Styles = styled.h3`
-    color: #333;
-    font-family: "PT Sans", Arial, sans-serif;
-    font-size: 2rem;
 `;
 
 const ImageStyles = styled(Img)`

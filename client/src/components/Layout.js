@@ -12,6 +12,7 @@ const AppStyles = styled.div`
     border: 5px solid black;
     border-radius: 2px;
     box-shadow: 10px 10px 0px 0px black;
+    overflow-y: scroll;
 `;
 
 const LineDiv = styled.div`
@@ -22,7 +23,6 @@ const LineDiv = styled.div`
     bottom: 10vh;
     left: -20px;
     background: black;
-}
 `;
 
 const GlobalStyle = createGlobalStyle`
@@ -37,12 +37,10 @@ const GlobalStyle = createGlobalStyle`
 
 export const Layout = ({ children }) => {
     const { title, description } = useSiteMetadata();
-    const handleDarkMode = () => {};
     return (
         <React.Fragment>
             <GlobalStyle />
             <AppStyles>
-                <button onClick={handleDarkMode}>dark mode</button>
                 <Header siteTitle={title} siteDescription={description} />
                 <LineDiv />
                 {children}
