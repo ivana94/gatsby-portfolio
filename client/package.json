@@ -5,6 +5,7 @@
     "main": "index.js",
     "scripts": {
         "dev": "gatsby develop -p 8080 -o",
+        "start": "npm run dev",
         "build": "gatsby build",
         "serve": "gatsby serve -p 9500 -o"
     },
