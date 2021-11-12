@@ -1,3 +1,6 @@
-# my blog
+# personal portfolio site - WIP
 
-Hello! Welcome to my blog! WIP :)
+**Front end**: Gatsby
+**CMS**: Sanity
+**Query Language**: GraphlQL
+**Styling**: Tailwind/Styled Components
