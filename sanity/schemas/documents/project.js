@@ -18,6 +18,11 @@ export default {
             },
         },
         {
+            name: "link",
+            title: "Github Link",
+            type: "url",
+        },
+        {
             name: "mainImage",
             title: "Main image",
             type: "image",
@@ -30,7 +35,7 @@ export default {
             type: "excerptPortableText",
             title: "Excerpt",
             description:
-                "This ends up on summary pages, on Google, when people share your post in social media.",
+                "This ends up on summary pages, on Google, when people share your post on social media.",
         },
         {
             name: "body",

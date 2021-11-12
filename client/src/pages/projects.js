@@ -16,18 +16,20 @@ const Projects = ({ data }) => {
                 <div className="container flex flex-col md:flex-row lg:flex-row md:flex-wrap lg:flex-wrap md:flex-1 lg:flex-1">
                     {data.projects.nodes.map(
                         ({ body, id, mainImage, slug, title }) => (
-                            <div className="mx-5 w-80" key={id}>
-                                <ImageStyles
-                                    fluid={mainImage.asset.fluid}
-                                    alt={title}
-                                />
-                                <h3 className="my-2 text-2xl font-serif font-medium text-gray-800">
-                                    {title}
-                                </h3>
-                                <p className="font-sans text-md text-gray-500">
-                                    {body[0].children[0].text}
-                                </p>
-                            </div>
+                            <Link to={`/projects/${slug.current}`}>
+                                <div className="mx-5 w-80" key={id}>
+                                    <ImageStyles
+                                        fluid={mainImage.asset.fluid}
+                                        alt={title}
+                                    />
+                                    <h3 className="my-2 text-2xl font-serif font-medium text-gray-800">
+                                        {title}
+                                    </h3>
+                                    <p className="font-sans text-md text-gray-500">
+                                        {body[0].children[0].text}
+                                    </p>
+                                </div>
+                            </Link>
                         )
                     )}
                 </div>

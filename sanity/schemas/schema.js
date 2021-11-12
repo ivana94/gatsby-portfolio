@@ -10,6 +10,7 @@ import category from "./documents/category";
 import post from "./documents/post";
 import project from "./documents/project";
 import author from "./documents/author";
+import about from "./documents/about";
 import bodyPortableText from "./objects/bodyPortableText";
 import mainImage from "./objects/mainImage";
 import excerptPortableText from "./objects/excerptPortableText";
@@ -26,6 +27,7 @@ export default createSchema({
         post,
         project,
         author,
+        about,
         category,
         // When added to this list, object types can be used as
         // { type: 'typename' } in other document schemas

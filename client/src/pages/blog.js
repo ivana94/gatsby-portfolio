@@ -48,7 +48,15 @@ const Blog = ({ data }) => {
             <Layout>
                 <div className="container flex flex-col md:flex-row lg:flex-row md:flex-wrap lg:flex-wrap md:flex-1 lg:flex-1">
                     {data.posts.nodes.map(
-                        ({ id, body, title, publishedAt, slug, mainImage }) => (
+                        ({
+                            id,
+                            body,
+                            title,
+                            publishedAt,
+                            slug,
+                            mainImage,
+                            excerpt,
+                        }) => (
                             <div className="mx-5 w-80" key={id}>
                                 <Link to={`/blog/${slug.current}`}>
                                     {!!mainImage.asset ? (
@@ -61,7 +69,7 @@ const Blog = ({ data }) => {
                                         {title}
                                     </h3>
                                     <p className="font-sans text-md text-gray-500">
-                                        {body[0].children[0].text}
+                                        {excerpt[0].children[0].text}
                                     </p>
                                 </Link>
                             </div>
@@ -103,6 +111,11 @@ export const query = graphql`
                     current
                 }
                 body {
+                    children {
+                        text
+                    }
+                }
+                excerpt {
                     children {
                         text
                     }
