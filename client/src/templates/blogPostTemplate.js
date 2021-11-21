@@ -36,11 +36,17 @@ const BlogPostTemplate = ({ data, pageContext }) => {
     const { previous, next } = pageContext;
     return (
         <Layout>
+            <h3 className="text-3xl tracking-wide my-5 text-center">{title}</h3>
+            <p className="text-gray-500 mb-5 text-center">
+                published {publishedAt}
+            </p>
             <Arrows next={next} previous={previous} />
-            <ImageStyles fluid={mainImage.asset.fluid} alt={title} />
+            <ImageStyles
+                fluid={mainImage.asset.fluid}
+                alt={title}
+                className="mb-10"
+            />
             <div className="container w-8/12">
-                <h3 className="text-3xl tracking-wide my-5">{title}</h3>
-                <p className="text-gray-500 mb-5">published {publishedAt}</p>
                 <BlogPostWrapper>
                     <PortableText
                         blocks={_rawBody}
@@ -65,7 +71,7 @@ export const query = graphql`
                 publishedAt(fromNow: true)
                 mainImage {
                     asset {
-                        fluid(maxWidth: 300) {
+                        fluid(maxWidth: 800) {
                             ...GatsbySanityImageFluid
                         }
                     }

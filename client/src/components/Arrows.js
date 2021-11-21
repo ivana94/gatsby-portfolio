@@ -3,14 +3,14 @@ import { Link } from "gatsby";
 
 export const Arrows = ({ previous, next }) => {
     return (
-        <div className="container">
+        <div className="container mb-12">
             {previous && (
-                <div className="float-left ">
+                <div className="float-left text-gray-500">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
-                        stroke="currentColor"
+                        stroke="#6b7280"
                         className="w-5 inline-block"
                     >
                         <path
@@ -26,7 +26,7 @@ export const Arrows = ({ previous, next }) => {
                 </div>
             )}
             {next && (
-                <div className="float-right">
+                <div className="float-right text-gray-500">
                     <Link to={`/blog/${next.slug.current}`}>
                         next post &nbsp;
                     </Link>
@@ -34,7 +34,7 @@ export const Arrows = ({ previous, next }) => {
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
-                        stroke="currentColor"
+                        stroke="#6b7280"
                         className="w-5 inline-block"
                     >
                         <path

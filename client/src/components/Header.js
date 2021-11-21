@@ -1,17 +1,22 @@
-import { Link } from "gatsby";
 import React from "react";
+import { Link } from "gatsby";
 import styled from "styled-components";
+import Coffee from "../components/Coffee";
 
 const HeaderStyles = styled.header`
-    margin: 5vh 0 10vh 0;
+    margin: 0vh 0 10vh 0;
     display: flex;
+    align-items: center;
+    position: relative;
 `;
 
 export const Header = ({ siteTitle, siteDescription }) => (
     <HeaderStyles>
-        <Link to="/">
-            <h1 className="font-mono text-2xl tracking-wide">{siteTitle}</h1>
-        </Link>
+        <div>
+            <Link to="/">
+                <Coffee>{siteTitle}</Coffee>
+            </Link>
+        </div>
         <nav className="flex flex-row-reverse w-full">
             <Link to="/projects">
                 <h3 className="font-mono text-xl tracking-wide mx-5 hover:underline">
