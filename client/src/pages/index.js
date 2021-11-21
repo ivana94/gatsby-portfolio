@@ -1,42 +1,68 @@
 import React from "react";
 import { Layout } from "../components/Layout";
-import { graphql } from "gatsby";
-import Img from "gatsby-image";
-import styled from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 
-const ImageStyles = styled(Img)`
-    /* position: absolute; */
-    filter: grayscale(100%) blur(2px);
-    opacity: 0.5;
-    width: 100%;
-    height: 50vh;
+const generateConfettiExplosionAnimation = () => {
+    let styles = "";
+
+    for (let i = 0; i < 100; i += 1) {
+        styles += `i:nth-of-type(${i}) {
+            transform: translate3d(
+                ${generateRandomNumber(200) - 100}px,
+                ${generateRandomNumber(50) - 100}px,
+                0
+            )
+            rotate(${generateRandomNumber(360)}deg);
+            background: hsla(${generateRandomNumber(360)}, 100%, 50%, 1);
+            animation: confetti-explosion 700ms ease-in-out;
+            opacity: 0;
+        }
+     `;
+    }
+    return css`
+        ${styles}
+    `;
+};
+
+const generateRandomNumber = (max) => Math.floor(Math.random() * max);
+
+const H1Styles = styled.h1`
+    cursor: pointer;
+    font-size: 2rem;
+    text-align: center;
 `;
 
-const Main = ({ data }) => {
+const Confetti = styled.div`
+    position: absolute;
+
+    i {
+        position: absolute;
+        display: block;
+        left: 75%;
+        top: 10px;
+        width: 3px;
+        height: 5px;
+        opacity: 0;
+    }
+    &:hover {
+        ${generateConfettiExplosionAnimation()};
+    }
+`;
+
+const Main = () => {
     return (
         <Layout>
-            <main>
-                {/* <ImageStyles
-                    fluid={data.fileName.childImageSharp.fluid}
-                ></ImageStyles> */}
-                <h3 className="text-4xl relative bottom-10">
-                    I'm a Software Engineer based in New York.
-                </h3>
-            </main>
+            <H1Styles>
+                <Confetti>
+                    Hello! I'm
+                    <span className="text-4xl text-red"> Ivana</span>
+                    {[...new Array(50)].map((_, index) => (
+                        <i key={index}></i>
+                    ))}
+                </Confetti>
+            </H1Styles>
         </Layout>
     );
 };
 
 export default Main;
-
-export const query = graphql`
-    query {
-        fileName: file(relativePath: { eq: "me.jpeg" }) {
-            childImageSharp {
-                fluid(maxWidth: 400, maxHeight: 250) {
-                    ...GatsbyImageSharpFluid
-                }
-            }
-        }
-    }
-`;
