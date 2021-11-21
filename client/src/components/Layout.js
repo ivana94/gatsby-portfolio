@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
-
 import { useSiteMetadata } from "../hooks/useSiteMetadata";
+import breakpoints from "../styles/breakpoints";
 import { Header } from "./Header";
 
 const AppStyles = styled.div`
@@ -13,6 +13,11 @@ const AppStyles = styled.div`
     border-radius: 2px;
     box-shadow: 10px 10px 0px 0px black;
     overflow-y: scroll;
+
+    @media only screen and ${breakpoints.device.sm} {
+        width: 100vw;
+        height: 100vh;
+    }
 `;
 
 const LineDiv = styled.div`

@@ -3,37 +3,14 @@ import { graphql, Link } from "gatsby";
 import Img from "gatsby-image";
 import styled from "styled-components";
 import { Layout } from "../components/Layout";
+import breakpoints from "../styles/breakpoints";
 
-const IndexWrapper = styled.main`
-    display: flex;
-    flex-wrap: wrap;
-`;
-
-const PostWrapper = styled.div`
-    padding: 0 15px;
-    width: 30%;
-
-    a {
-        text-decoration: none;
-    }
-
-    h3 {
-        color: #000;
-        font-family: Georgia, "New York Times";
-        font-weight: 300;
-        font-size: 1.5rem;
-    }
-
-    p.date-published {
-        font-family: sans-serif;
-        font-weight: 500;
-        color: darkgray;
-    }
-
-    p {
-        color: #333;
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        font-size: 0.9rem;
+const BlogContainer = styled.div`
+    @media only screen and ${breakpoints.device.sm} {
+        align-items: center;
+        a {
+            margin: 20px 0;
+        }
     }
 `;
 
@@ -46,17 +23,9 @@ const Blog = ({ data }) => {
     return (
         <>
             <Layout>
-                <div className="container flex flex-col md:flex-row lg:flex-row md:flex-wrap lg:flex-wrap md:flex-1 lg:flex-1">
+                <BlogContainer className="container flex flex-col md:flex-row lg:flex-row md:flex-wrap lg:flex-wrap md:flex-1 lg:flex-1">
                     {data.posts.nodes.map(
-                        ({
-                            id,
-                            body,
-                            title,
-                            publishedAt,
-                            slug,
-                            mainImage,
-                            excerpt,
-                        }) => (
+                        ({ id, title, slug, mainImage, excerpt }) => (
                             <div className="mx-5 w-80" key={id}>
                                 <Link to={`/blog/${slug.current}`}>
                                     {!!mainImage.asset ? (
@@ -75,7 +44,7 @@ const Blog = ({ data }) => {
                             </div>
                         )
                     )}
-                </div>
+                </BlogContainer>
             </Layout>
         </>
     );

@@ -3,6 +3,16 @@ import { graphql, Link } from "gatsby";
 import Img from "gatsby-image";
 import styled from "styled-components";
 import { Layout } from "../components/Layout";
+import breakpoints from "../styles/breakpoints";
+
+const ProjectsContainer = styled.div`
+    a {
+        margin-bottom: 20px;
+    }
+    @media only screen and ${breakpoints.device.sm} {
+        align-items: center;
+    }
+`;
 
 const ImageStyles = styled(Img)`
     width: 100%;
@@ -13,7 +23,7 @@ const Projects = ({ data }) => {
     return (
         <>
             <Layout>
-                <div className="container flex flex-col md:flex-row lg:flex-row md:flex-wrap lg:flex-wrap md:flex-1 lg:flex-1">
+                <ProjectsContainer className="container flex flex-col md:flex-row lg:flex-row md:flex-wrap lg:flex-wrap md:flex-1 lg:flex-1">
                     {data.projects.nodes.map(
                         ({ body, id, mainImage, slug, title }) => (
                             <Link to={`/projects/${slug.current}`}>
@@ -32,7 +42,7 @@ const Projects = ({ data }) => {
                             </Link>
                         )
                     )}
-                </div>
+                </ProjectsContainer>
             </Layout>
         </>
     );

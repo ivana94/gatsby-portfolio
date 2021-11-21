@@ -46,7 +46,7 @@ const BlogPostTemplate = ({ data, pageContext }) => {
                 alt={title}
                 className="mb-10"
             />
-            <div className="container w-8/12">
+            <div className="container lg:w-8/12 w-full">
                 <BlogPostWrapper>
                     <PortableText
                         blocks={_rawBody}
