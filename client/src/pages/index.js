@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout } from "../components/Layout";
-import styled, { keyframes, css } from "styled-components";
+import styled, { css } from "styled-components";
 
 const generateConfettiExplosionAnimation = () => {
     let styles = "";
