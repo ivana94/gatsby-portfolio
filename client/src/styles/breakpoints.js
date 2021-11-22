@@ -10,4 +10,4 @@ const device = {
     lg: `(max-width: ${size.lg})`,
 };
 
-export default { size, device };
+export { device };

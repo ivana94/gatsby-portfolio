@@ -1,12 +1,12 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
-import Img from "gatsby-image";
+import { GatsbyImage } from "gatsby-plugin-image";
 import styled from "styled-components";
 import { Layout } from "../components/Layout";
-import breakpoints from "../styles/breakpoints";
+import { device } from "../styles/breakpoints";
 
 const BlogContainer = styled.div`
-    @media only screen and ${breakpoints.device.sm} {
+    @media only screen and ${device.sm} {
         align-items: center;
         a {
             margin: 20px 0;
@@ -14,7 +14,7 @@ const BlogContainer = styled.div`
     }
 `;
 
-const ImageStyles = styled(Img)`
+const ImageStyles = styled(GatsbyImage)`
     width: 100%;
     height: 20vh;
 `;
@@ -30,7 +30,9 @@ const Blog = ({ data }) => {
                                 <Link to={`/blog/${slug.current}`}>
                                     {!!mainImage.asset ? (
                                         <ImageStyles
-                                            fluid={mainImage.asset.fluid}
+                                            image={
+                                                mainImage.asset.gatsbyImageData
+                                            }
                                             alt={title}
                                         />
                                     ) : null}
@@ -59,21 +61,7 @@ export const query = graphql`
                 publishedAt(fromNow: true)
                 mainImage {
                     asset {
-                        fluid(maxWidth: 300) {
-                            ...GatsbySanityImageFluid
-                        }
-                    }
-                }
-                author {
-                    name
-                    image {
-                        asset {
-                            fluid {
-                                base64
-                                srcWebp
-                                srcSetWebp
-                            }
-                        }
+                        gatsbyImageData
                     }
                 }
                 slug {

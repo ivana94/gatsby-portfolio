@@ -1,15 +1,16 @@
 const siteMetadata = {
-    title: `Matijevic`,
-    description: `my dev blog`,
+    title: "Matijevic",
+    description: "my dev blog",
 };
 
 module.exports = {
     siteMetadata: siteMetadata,
     plugins: [
-        `gatsby-plugin-styled-components`,
-        `gatsby-transformer-sharp`,
-        `gatsby-plugin-sharp`,
+        "gatsby-plugin-styled-components",
+        "gatsby-transformer-sharp",
+        "gatsby-plugin-sharp",
         "gatsby-plugin-postcss",
+        "gatsby-plugin-image",
         {
             resolve: "gatsby-source-sanity",
             options: {
@@ -20,12 +21,12 @@ module.exports = {
             },
         },
         {
-            resolve: `gatsby-plugin-mdx`,
+            resolve: "gatsby-plugin-mdx",
             options: {
-                extensions: [`.mdx`, `.md`],
+                extensions: [".mdx", ".md"],
                 gatsbyRemarkPlugins: [
                     {
-                        resolve: `gatsby-remark-images`,
+                        resolve: "gatsby-remark-images",
                         options: {
                             maxWidth: 590,
                         },
@@ -33,7 +34,7 @@ module.exports = {
                 ],
                 plugins: [
                     {
-                        resolve: `gatsby-remark-images`,
+                        resolve: "gatsby-remark-images",
                         options: {
                             maxWidth: 590,
                         },
@@ -42,8 +43,8 @@ module.exports = {
             },
         },
         {
-            resolve: `gatsby-source-filesystem`,
-            options: { path: `${__dirname}/images`, name: `images` },
+            resolve: "gatsby-source-filesystem",
+            options: { path: `${__dirname}/images`, name: "images" },
         },
     ],
 };

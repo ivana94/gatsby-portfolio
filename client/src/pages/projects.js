@@ -1,20 +1,20 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
-import Img from "gatsby-image";
+import { GatsbyImage } from "gatsby-plugin-image";
 import styled from "styled-components";
 import { Layout } from "../components/Layout";
-import breakpoints from "../styles/breakpoints";
+import { device } from "../styles/breakpoints";
 
 const ProjectsContainer = styled.div`
     a {
         margin-bottom: 20px;
     }
-    @media only screen and ${breakpoints.device.sm} {
+    @media only screen and ${device.sm} {
         align-items: center;
     }
 `;
 
-const ImageStyles = styled(Img)`
+const ImageStyles = styled(GatsbyImage)`
     width: 100%;
     height: 20vh;
 `;
@@ -29,7 +29,7 @@ const Projects = ({ data }) => {
                             <Link to={`/projects/${slug.current}`}>
                                 <div className="mx-5 w-80" key={id}>
                                     <ImageStyles
-                                        fluid={mainImage.asset.fluid}
+                                        image={mainImage.asset.gatsbyImageData}
                                         alt={title}
                                     />
                                     <h3 className="my-2 text-2xl font-serif font-medium text-gray-800">
@@ -56,9 +56,7 @@ export const query = graphql`
                 title
                 mainImage {
                     asset {
-                        fluid(maxWidth: 300) {
-                            ...GatsbySanityImageFluid
-                        }
+                        gatsbyImageData
                     }
                 }
                 slug {

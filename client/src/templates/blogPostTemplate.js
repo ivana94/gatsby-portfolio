@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql } from "gatsby";
 import styled from "styled-components";
-import Img from "gatsby-image";
+import { GatsbyImage } from "gatsby-plugin-image";
 import { Layout } from "../components/Layout";
 import { Arrows } from "../components/Arrows";
 import { PortableText } from "../components/PortableText";
@@ -20,7 +20,7 @@ const BlogPostWrapper = styled.section`
     }
 `;
 
-const ImageStyles = styled(Img)`
+const ImageStyles = styled(GatsbyImage)`
     width: 100%;
     height: 60vh;
     border-radius: 5px;
@@ -42,7 +42,7 @@ const BlogPostTemplate = ({ data, pageContext }) => {
             </p>
             <Arrows next={next} previous={previous} />
             <ImageStyles
-                fluid={mainImage.asset.fluid}
+                image={mainImage.asset.gatsbyImageData}
                 alt={title}
                 className="mb-10"
             />
@@ -71,9 +71,7 @@ export const query = graphql`
                 publishedAt(fromNow: true)
                 mainImage {
                     asset {
-                        fluid(maxWidth: 800) {
-                            ...GatsbySanityImageFluid
-                        }
+                        gatsbyImageData
                     }
                 }
             }
