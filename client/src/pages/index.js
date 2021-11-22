@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Layout } from "../components/Layout";
 import styled, { css } from "styled-components";
 
@@ -8,8 +8,8 @@ const generateConfettiExplosionAnimation = () => {
     for (let i = 0; i < 100; i += 1) {
         styles += `i:nth-of-type(${i}) {
             transform: translate3d(
-                ${generateRandomNumber(200) - 100}px,
-                ${generateRandomNumber(50) - 100}px,
+                ${generateRandomNumber(800) - 100}px,
+                ${generateRandomNumber(500) - 100}px,
                 0
             )
             rotate(${generateRandomNumber(360)}deg);
@@ -26,41 +26,49 @@ const generateConfettiExplosionAnimation = () => {
 
 const generateRandomNumber = (max) => Math.floor(Math.random() * max);
 
-const H1Styles = styled.h1`
-    cursor: pointer;
-    font-size: 2rem;
-    text-align: center;
-`;
-
-const Confetti = styled.div`
+const Confetti = styled.span`
     position: absolute;
 
     i {
         position: absolute;
         display: block;
-        left: 75%;
-        top: 10px;
-        width: 3px;
-        height: 5px;
-        opacity: 0;
+        left: -75px;
+        /* top: 10px; */
+        margin-left: 15%;
+        width: 7px;
+        height: 9px;
+        opacity: 1;
     }
-    &:hover {
-        ${generateConfettiExplosionAnimation()};
-    }
+
+    ${generateConfettiExplosionAnimation()};
 `;
 
 const Main = () => {
+    const [confettiActive, setConfettiActive] = useState(false);
+    const triggerConfetti = () => {
+        setConfettiActive(true);
+    };
+
     return (
         <Layout>
-            <H1Styles>
-                <Confetti>
-                    Hello! I'm
-                    <span className="text-4xl text-red"> Ivana</span>
-                    {[...new Array(50)].map((_, index) => (
-                        <i key={index}></i>
-                    ))}
-                </Confetti>
-            </H1Styles>
+            <div className="text-6xl font-light">
+                Hello! I'm&nbsp;
+                <span onMouseOver={triggerConfetti} className="text-pink-600">
+                    Ivana
+                </span>
+                {confettiActive && (
+                    <Confetti onAnimationEnd={() => setConfettiActive(false)}>
+                        {[...new Array(100)].map((_, index) => (
+                            <i key={index}></i>
+                        ))}
+                    </Confetti>
+                )}
+                &nbsp;and I'm an American software engineer based in NYC. I love
+                coding in JavaScript and building interactive interfaces with{" "}
+                <strong>React</strong>,<strong>Vue</strong>,{" "}
+                <strong>Node</strong>, and more. I also enjoy teaching and
+                mentoring others.
+            </div>
         </Layout>
     );
 };
