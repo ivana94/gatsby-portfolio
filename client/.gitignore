@@ -10,5 +10,5 @@ public
 # Local Netlify folder
 .netlify
 
-# posts
-posts
+# Gatsby Cache
+.cache
