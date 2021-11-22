@@ -1,10 +1,10 @@
 import React from "react";
-import Img from "gatsby-image";
-import { getFluidGatsbyImage } from "gatsby-source-sanity";
+import { GatsbyImage } from "gatsby-plugin-image";
+import { getGatsbyImageData } from "gatsby-source-sanity";
 import clientConfig from "../../client-config";
 
 const Figure = ({ node }) => {
-    const fluidProps = getFluidGatsbyImage(
+    const gatsbyImageData = getGatsbyImageData(
         node.asset._ref,
         {
             maxWidth: 800,
@@ -14,7 +14,7 @@ const Figure = ({ node }) => {
     return (
         <>
             <figure>
-                <Img fluid={fluidProps} alt={node.alt} />
+                <GatsbyImage image={gatsbyImageData} alt={node.alt} />
             </figure>
             <caption>{node.caption}</caption>
         </>

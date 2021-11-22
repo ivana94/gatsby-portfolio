@@ -20,14 +20,15 @@ const ImageStyles = styled(GatsbyImage)`
 `;
 
 const Projects = ({ data }) => {
+    console.log("data", data);
     return (
         <>
             <Layout>
                 <ProjectsContainer className="container flex flex-col md:flex-row lg:flex-row md:flex-wrap lg:flex-wrap md:flex-1 lg:flex-1">
                     {data.projects.nodes.map(
-                        ({ body, id, mainImage, slug, title }) => (
-                            <Link to={`/projects/${slug.current}`}>
-                                <div className="mx-5 w-80" key={id}>
+                        ({ body, id, link, mainImage, slug, title }) => (
+                            <a target="_blank" href={link} key={id}>
+                                <div className="mx-5 w-80">
                                     <ImageStyles
                                         image={mainImage.asset.gatsbyImageData}
                                         alt={title}
@@ -39,7 +40,7 @@ const Projects = ({ data }) => {
                                         {body[0].children[0].text}
                                     </p>
                                 </div>
-                            </Link>
+                            </a>
                         )
                     )}
                 </ProjectsContainer>
@@ -53,6 +54,7 @@ export const query = graphql`
         projects: allSanityProject {
             nodes {
                 id
+                link
                 title
                 mainImage {
                     asset {
