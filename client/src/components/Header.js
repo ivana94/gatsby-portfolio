@@ -10,11 +10,11 @@ const HeaderStyles = styled.header`
     position: relative;
 `;
 
-export const Header = ({ siteTitle, siteDescription }) => (
+export const Header = () => (
     <HeaderStyles>
         <div>
             <Link to="/">
-                <Coffee>{siteTitle}</Coffee>
+                <Coffee></Coffee>
             </Link>
         </div>
         <nav className="flex flex-row-reverse w-full">
@@ -28,11 +28,11 @@ export const Header = ({ siteTitle, siteDescription }) => (
                     blog
                 </h3>
             </Link>
-            <Link to="/about">
+            {/* <Link to="/about">
                 <h3 className="font-mono text-xl tracking-wide mx-5 hover:underline">
                     about
                 </h3>
-            </Link>
+            </Link> */}
         </nav>
     </HeaderStyles>
 );
