@@ -3,6 +3,7 @@ import styled, { createGlobalStyle } from "styled-components";
 import { useSiteMetadata } from "../hooks/useSiteMetadata";
 import { device } from "../styles/breakpoints";
 import { Header } from "./Header";
+import { Seo } from "./Seo";
 
 const AppStyles = styled.div`
     background: white;
@@ -44,6 +45,7 @@ export const Layout = ({ children }) => {
     const { title, description } = useSiteMetadata();
     return (
         <React.Fragment>
+            <Seo />
             <GlobalStyle />
             <AppStyles>
                 <Header siteTitle={title} siteDescription={description} />

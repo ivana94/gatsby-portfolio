@@ -1,16 +1,19 @@
-const siteMetadata = {
-    title: "Matijevic",
-    description: "my dev blog",
-};
-
 module.exports = {
-    siteMetadata: siteMetadata,
+    siteMetadata: {
+        title: "Ivana Matijevic - Software Engineer",
+        titleTemplate: "Ivana Matijevic - Software Engineer",
+        description:
+            "Software Engineer with 4 years experience building websites, teaching, and mentoring",
+        url: "https://ivanamatijevic.dev/",
+        image: "images/me.jpeg",
+    },
     plugins: [
         "gatsby-plugin-styled-components",
         "gatsby-transformer-sharp",
         "gatsby-plugin-sharp",
         "gatsby-plugin-postcss",
         "gatsby-plugin-image",
+        "gatsby-plugin-react-helmet",
         {
             resolve: "gatsby-source-sanity",
             options: {
@@ -18,28 +21,6 @@ module.exports = {
                 dataset: "production",
                 watchMode: true,
                 token: process.env.SANITY_TOKEN,
-            },
-        },
-        {
-            resolve: "gatsby-plugin-mdx",
-            options: {
-                extensions: [".mdx", ".md"],
-                gatsbyRemarkPlugins: [
-                    {
-                        resolve: "gatsby-remark-images",
-                        options: {
-                            maxWidth: 590,
-                        },
-                    },
-                ],
-                plugins: [
-                    {
-                        resolve: "gatsby-remark-images",
-                        options: {
-                            maxWidth: 590,
-                        },
-                    },
-                ],
             },
         },
         {

@@ -1,5 +1,5 @@
 import React from "react";
-import { graphql, Link } from "gatsby";
+import { graphql } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
 import styled from "styled-components";
 import { Layout } from "../components/Layout";
@@ -27,7 +27,12 @@ const Projects = ({ data }) => {
                 <ProjectsContainer className="container flex flex-col md:flex-row lg:flex-row md:flex-wrap lg:flex-wrap md:flex-1 lg:flex-1">
                     {data.projects.nodes.map(
                         ({ body, id, link, mainImage, slug, title }) => (
-                            <a target="_blank" href={link} key={id}>
+                            <a
+                                target="_blank"
+                                rel="noreferrer"
+                                href={link}
+                                key={id}
+                            >
                                 <div className="mx-5 w-80">
                                     <ImageStyles
                                         image={mainImage.asset.gatsbyImageData}

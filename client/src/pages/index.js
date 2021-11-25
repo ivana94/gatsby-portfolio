@@ -33,7 +33,6 @@ const Confetti = styled.span`
         position: absolute;
         display: block;
         left: -75px;
-        /* top: 10px; */
         margin-left: 15%;
         width: 7px;
         height: 9px;

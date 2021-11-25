@@ -27,12 +27,8 @@ const ImageStyles = styled(GatsbyImage)`
 `;
 
 const BlogPostTemplate = ({ data, pageContext }) => {
-    const {
-        title,
-        publishedAt,
-        mainImage,
-        _rawBody,
-    } = data.allSanityPost.nodes[0];
+    const { title, publishedAt, mainImage, _rawBody } =
+        data.allSanityPost.nodes[0];
     const { previous, next } = pageContext;
     return (
         <Layout>
