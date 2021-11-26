@@ -20,7 +20,6 @@ const ImageStyles = styled(GatsbyImage)`
 `;
 
 const Projects = ({ data }) => {
-    console.log("data", data);
     return (
         <>
             <Layout>
