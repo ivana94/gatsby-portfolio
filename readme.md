@@ -1,8 +1,12 @@
-# personal portfolio site - WIP
+# Personal Portfolio Site
 
-**Front end**: Gatsby
+This is a personal portfolio site that features a blog, recent projects I've worked on, and some CSS animations. Data like blog posts and projects are inputted into Sanity, a headless CMS. that data is fed into the Gatsby frontend, which renders it out.
 
-**CMS**: Sanity
+### Tech Stack
+
+**Front end**: Gatsby (React)
+
+**Headless CMS**: Sanity
 
 **Query Language**: GraphlQL
 
