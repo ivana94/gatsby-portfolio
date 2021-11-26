@@ -1,30 +1,30 @@
 {
-    "name": "blog",
-    "private": true,
-    "version": "1.0.0",
-    "description": "",
-    "main": "package.json",
-    "author": "Ivana Matijevic <ivmatij@gmail.com>",
-    "license": "UNLICENSED",
-    "scripts": {
-        "start": "sanity start",
-        "build": "sanity build"
-    },
-    "keywords": [
-        "sanity"
-    ],
-    "dependencies": {
-        "@sanity/base": "^2.2.5",
-        "@sanity/code-input": "^2.2.6",
-        "@sanity/components": "^2.1.4",
-        "@sanity/core": "^2.2.3",
-        "@sanity/default-layout": "^2.2.5",
-        "@sanity/default-login": "^2.1.4",
-        "@sanity/desk-tool": "^2.2.5",
-        "@sanity/vision": "^2.1.4",
-        "prop-types": "^15.7",
-        "react": "^17.0",
-        "react-dom": "^17.0",
-        "styled-components": "^5.3.3"
-    }
+  "name": "blog",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "package.json",
+  "author": "Ivana Matijevic <ivmatij@gmail.com>",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "sanity start",
+    "build": "sanity build"
+  },
+  "keywords": [
+    "sanity"
+  ],
+  "dependencies": {
+    "@sanity/base": "^2.22.0",
+    "@sanity/code-input": "^2.22.0",
+    "@sanity/components": "^2.14.0",
+    "@sanity/core": "^2.22.0",
+    "@sanity/default-layout": "^2.22.0",
+    "@sanity/default-login": "^2.22.0",
+    "@sanity/desk-tool": "^2.22.2",
+    "@sanity/vision": "^2.22.0",
+    "prop-types": "^15.7",
+    "react": "^17.0",
+    "react-dom": "^17.0",
+    "styled-components": "^5.3.3"
+  }
 }
