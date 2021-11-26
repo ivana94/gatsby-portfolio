@@ -24,8 +24,9 @@ const Projects = ({ data }) => {
         <>
             <Layout>
                 <ProjectsContainer className="container flex flex-col md:flex-row lg:flex-row md:flex-wrap lg:flex-wrap md:flex-1 lg:flex-1">
-                    {data.projects.nodes.map(
-                        ({ body, id, link, mainImage, slug, title }) => (
+                    {data.projects.nodes
+                        .reverse()
+                        .map(({ body, id, link, mainImage, slug, title }) => (
                             <a
                                 target="_blank"
                                 rel="noreferrer"
@@ -45,8 +46,7 @@ const Projects = ({ data }) => {
                                     </p>
                                 </div>
                             </a>
-                        )
-                    )}
+                        ))}
                 </ProjectsContainer>
             </Layout>
         </>
@@ -55,7 +55,7 @@ const Projects = ({ data }) => {
 
 export const query = graphql`
     query {
-        projects: allSanityProject {
+        projects: allSanityProject(sort: { fields: _updatedAt }) {
             nodes {
                 id
                 link
