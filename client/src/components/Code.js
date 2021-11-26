@@ -7,7 +7,7 @@ const Code = ({ node }) => {
     }
     const { language, code } = node;
     return (
-        <SyntaxHighlighter language={language || "text"}>
+        <SyntaxHighlighter language={language || "text"} className="mb-5">
             {code}
         </SyntaxHighlighter>
     );

@@ -14,9 +14,23 @@ const BlogPostWrapper = styled.section`
 
     p {
         font-size: 1.2rem;
-        margin-bottom: 5vh;
+        margin-bottom: 1.25rem;
         line-height: 1.5rem;
         color: #444;
+    }
+
+    ol {
+        list-style: decimal;
+        color: #444;
+        font-size: 1.2rem;
+        margin-bottom: 1.25rem;
+        margin-left: 1.1rem;
+        line-height: 1.5rem;
+
+        ol {
+            list-style: lower-alpha;
+            margin-left: 2rem;
+        }
     }
 `;
 
@@ -32,10 +46,10 @@ const BlogPostTemplate = ({ data, pageContext }) => {
     const { previous, next } = pageContext;
     return (
         <Layout>
-            <h3 className="text-3xl tracking-wide my-5 text-center">{title}</h3>
-            <p className="text-gray-500 mb-5 text-center">
+            <h1 className="text-4xl tracking-wide my-5 text-center">{title}</h1>
+            <h3 className="text-gray-500 mb-5 text-center">
                 published {publishedAt}
-            </p>
+            </h3>
             <Arrows next={next} previous={previous} />
             <ImageStyles
                 image={mainImage.asset.gatsbyImageData}
